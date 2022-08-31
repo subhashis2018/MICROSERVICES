@@ -1,0 +1,31 @@
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+
+sudo apt-get install -y kubelet=1.21.0-00  kubeadm=1.21.0-00 kubectl=1.21.0-00
+
+sudo apt-mark hold kubelet kubeadm kubectl
+
+
+......................................
+
+sudo kubedm init
+
+sudo kubeadm init --config kubeadm-config.yaml --ignore-preflight-errors=all
+
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.43.5:6443 --token qtxt3k.40cqh19wpwjn58ez --discovery-token-ca-cert-hash sha256:250b05e42361468f3e5dbdee73338dc9dc5733da7648fe2709429b5ed218a68d

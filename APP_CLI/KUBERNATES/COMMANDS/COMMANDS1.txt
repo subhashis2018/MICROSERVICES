@@ -1,0 +1,31 @@
+--------------------------------------------------------------------------------------------------------------------
+                        BASIC KUBERNETES COMMANDS TO CHECK CLUSTER STATUS
+--------------------------------------------------------------------------------------------------------------------
+kubectl get node
+
+kubectl get pod
+
+kubectl get nodes
+
+service kubelet status
+
+kubectl get pod -n kube-system
+
+kubectl get pods -o wide --all-namespaces
+
+kubectl describe pod coredns-66bff467f8-pr6pt --namespace=kube-system
+
+kubectl describe node | grep -i taint
+
+kubectl taint nodes --all node.kubernetes.io/not-ready:NoExecute
+
+kubectl describe pod weave-net-k4mdf --namespace=kube-system
+
+kubectl logs weave-net-k4mdf -c weave --namespace=kube-system
+
+kubectl logs weave-net-ghvnj -n kube-system -c weave
+
+kubectl get pod -n kube-system -o wide  | grep weave
+--------------------------------------------------------------------------------------------------------------------------
+                             
+--------------------------------------------------------------------------------------------------------------------------
